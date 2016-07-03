@@ -1,0 +1,21 @@
+<tr class="template-tr-<%=rowId%>">
+    <%
+        var col = null,colAttribute = null;
+        for(var i =0,len = row.length ; i < len ; i++){
+            col = row[i];
+            colAttribute = colAttributes[i];
+            switch(colAttribute.colType){
+                case 'link':
+    %>
+        <td class="tr-<%=rowId%>-td-<%=i%> <%=colAttribute.className%>"><a href="" style="color: #ff0000;"><%=col%></a></td>
+    <%
+                    break;
+                default:
+    %>
+         <td class="tr-<%=rowId%>-td-<%=i%> <%=colAttribute.className%>"><%=col%></td>
+    <%
+                    break;
+            }
+        }
+    %>
+</tr>

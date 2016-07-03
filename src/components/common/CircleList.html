@@ -1,0 +1,24 @@
+<div class="bt-circle" style="border: 1px solid #dddddd">
+    <table class="bt-table bt-circle-list" id="circle-list-1">
+        <tbody>
+        <%
+         var row,rows = tableData.rows;
+        for(var j = 1,len = rows.length ; j < len ; j++){
+            row = rows[j];
+        %>
+        <tr class="tr-<%=j%> item <% if(j == (len-1)){%> hide <%}%>">
+            <script>
+                new BT.TableRow({
+                    wrapper:'#circle-list-1 .tr-<%=j%>',
+                    data:{
+                        colAttributes:<%=JSON.stringify(tableData.colAttributes)%>,
+                        rowId:<%=j%>,
+                        row:<%=JSON.stringify(row)%>
+                    }
+                });
+            </script>
+        </tr>
+        <%}%>
+        </tbody>
+    </table>
+</div>

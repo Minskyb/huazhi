@@ -1,0 +1,34 @@
+<table class="bt-table bt-table-border-bottom" id="base-table-1">
+    <thead>
+        <tr>
+            <%
+            var header = tableData.rows[0],colAttribute = null;
+            for(var i = 0,len = header.length ; i < len ; i++){
+                colAttribute = tableData.colAttributes[i]
+            %>
+            <th class="<%=colAttribute.className%>"><%=header[i]%></th>
+            <%}%>
+        </tr>
+    </thead>
+    <tbody class="">
+        <%
+        var row,rows = tableData.rows;
+        for(var j = 1,len = rows.length ; j < len ;j++){
+        row = rows[j]
+        %>
+        <tr class="tr-<%=j%>">
+            <script>
+                new BT.TableRow({
+                    wrapper:'#base-table-1 .tr-<%=j%>',
+                    data:{
+                        colAttributes:<%=JSON.stringify(tableData.colAttributes)%>,
+                        rowId:<%=j%>,
+                        row:<%=JSON.stringify(row)%>
+                    }
+                });
+            </script>
+        </tr>
+        <%}%>
+    </tbody>
+</table>
+

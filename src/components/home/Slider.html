@@ -1,0 +1,19 @@
+<div class="bt-slider clearfix" style="width: 100%;">
+    <div class="bt-slider-content">
+        <%
+        for(var i=0,len = sliders.length; i < len ; i ++){
+        slider = sliders[i]
+        %>
+        <div class="bt-slider-item <% if(i==0){%>active<%}%>"><a style="color: #ffffff" href="<%=slider.url%>"><img src="<%=slider.img%>" class="bt-full" alt=""/></a></div>
+        <%}%>
+    </div>
+    <div class="bt-slider-nav">
+        <%
+        for(var i = 0,len = sliders.length; i < len ; i++){
+        %>
+        <a data-slide-to="<%=i%>" class="<% if(i==0){%>active<%}%>"></a>
+        <%}%>
+    </div>
+    <a class="bt-slider-controls left"></a>
+    <a class="bt-slider-controls right"></a>
+</div>
