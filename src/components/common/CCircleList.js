@@ -5,8 +5,10 @@
 
 var BC = require('../../abstract/component');
 var $ = require('jquery');
-var template = require('./CircleList.html');
+var template = require('./CCircleList.html');
 var TableRow = require('./TableRow');
+var CircleList = require('../../libs/cow/src/circleList')
+
 
 if(Window.BT){
     window.BT.TableRow = TableRow
@@ -17,12 +19,12 @@ else{
     }
 }
 
-var CircleList = function(options){
+var CCircleList = function(options){
     BC.call(this,options);
 }
 
-CircleList.prototype = $.extend({},BC.prototype,{
-    constructor :CircleList,
+CCircleList.prototype = $.extend({},BC.prototype,{
+    constructor :CCircleList,
     initProperty :function(){
         BC.prototype.initProperty.call(this);
 
@@ -56,11 +58,13 @@ CircleList.prototype = $.extend({},BC.prototype,{
     },
     render : function(){
         BC.prototype.render.call(this);
-        $(".bt-circle").CircleList();
+        // $(".bt-circle").CircleList();
+	    var circleList = CircleList($(".cow_circle_list"),{});
+	    console.log();
     }
 
 });
 
 
-module.exports = CircleList;
+module.exports = CCircleList;
 

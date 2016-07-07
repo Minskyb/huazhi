@@ -1,15 +1,15 @@
-<div class="bt-circle" style="border: 1px solid #dddddd">
-    <table class="bt-table bt-circle-list" id="circle-list-1">
+<div class="cow_circle_list">
+    <table class="cow_table cow_circle_content" id="cow_circle_content">
         <tbody>
         <%
          var row,rows = tableData.rows;
         for(var j = 1,len = rows.length ; j < len ; j++){
             row = rows[j];
         %>
-        <tr class="tr-<%=j%> item <% if(j == (len-1)){%> hide <%}%>">
+        <tr class="tr-<%=j%> item <% if(j == (len-1)){%> cow_hide <%}%>">
             <script>
                 new BT.TableRow({
-                    wrapper:'#circle-list-1 .tr-<%=j%>',
+                    wrapper:'#cow_circle_content .tr-<%=j%>',
                     data:{
                         colAttributes:<%=JSON.stringify(tableData.colAttributes)%>,
                         rowId:<%=j%>,

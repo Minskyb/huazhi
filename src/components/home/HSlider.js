@@ -4,14 +4,16 @@
 
 var $ = require('jquery');
 var BC = require('../../abstract/component.js');
-var template = require('./Slider.html');
+var template = require('./HSlider.html');
 
-var Slider = function(options){
+var Slider = require('../../libs/cow/src/slider');
+
+var HSlider = function(options){
     BC.call(this,options);
 }
 
-Slider.prototype = $.extend({},BC.prototype,{
-    constructor : Slider,
+HSlider.prototype = $.extend({},BC.prototype,{
+    constructor : HSlider,
     /**/
     initProperty : function(){
         BC.prototype.initProperty.call(this);
@@ -36,8 +38,10 @@ Slider.prototype = $.extend({},BC.prototype,{
     },
     render : function(){
         BC.prototype.render.call(this);
-        $(".bt-slider").Slider({});
+
+	    var slider = Slider($("#h_slider"),{});
+        // $(".bt-slider").Slider({});
     }
 });
 
-module.exports = Slider;
+module.exports = HSlider;

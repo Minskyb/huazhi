@@ -4,18 +4,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-
-var commonLib = new webpack.optimize.CommonsChunkPlugin({
-    name:"commons",
-    filename:'commons.js',
-    minChunks:2,  // 被至少 2 个 chunks 引用才会被提炼出来。
-    chunks:["index","loginRegister"]
-})
-
-var chunkCss =  new ExtractTextPlugin("[name].css",{
-    allChunks:true
-})
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /*
  * 注意：兼容模式调试时，请关闭热启动
@@ -26,16 +15,33 @@ module.exports = {
         login_register:'./src/entry/loginRegister'
     },
     output:{
-        path:path.join(__dirname,'dist'),
-        filename:'[name].js',
-        publicPath:path.join(__dirname,'static')
+        path:path.join(__dirname,'dist','js'),
+        filename:'[name]?[chunkhash:8].js',
+	    chunkFilename: "./async/[name].[id].js"
     },
     plugins:[
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.NoErrorsPlugin(),
-        commonLib,
-        chunkCss
+	    new webpack.optimize.CommonsChunkPlugin({
+		    name:"commons",
+		    filename:'commons.js',
+		    minChunks:2,  // 被至少 2 个 chunks 引用才会被提炼出来。
+		    chunks:["index","loginRegister"]
+	    }),
+	    new ExtractTextPlugin("[name].css",{
+		    allChunks:true
+	    }),
+	    new HtmlWebpackPlugin({
+		    filename:'../index.html',
+		    chunks:['index','commons'],
+		    template:'./src/index.html'
+	    }),
+	    new HtmlWebpackPlugin({
+		    filename:'../login_register.html',
+		    chunks:['index','commons'],
+		    template:'./src/login_register.html'
+	    })
     ],
     externals:{
         "jquery":"jQuery"
@@ -46,6 +52,10 @@ module.exports = {
                 test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
                 loader: 'url-loader?limit=50000&name=[path][name].[ext]'
             },
+	        {
+		        test:/\.css$/,
+		        loaders:['style','css']
+	        },
             {
                 test:/\.less$/,
                 loaders:['style','css','less']

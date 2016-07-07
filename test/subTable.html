@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table border-collapse="collapse" border="1px solid">
+        <tr>
+            <th>恭喜</th>
+            <th>NIMA</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+           <td>1</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+        </tr>
+    </table>
+    <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            navigator.geolocation.getCurrentPosition(function(position){
+
+                console.log(position);
+//            drawMapCenteredAt(position.coords.latitude, positions.coords.longitude);
+            },function(error){
+                console.log(error);
+            });
+        });
+    </script>
+</body>
+</html>

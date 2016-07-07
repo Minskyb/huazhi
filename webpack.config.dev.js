@@ -4,7 +4,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var commonLib = new webpack.optimize.CommonsChunkPlugin({
     name:"commons",
@@ -27,16 +27,25 @@ module.exports = {
         login_register:'./src/entry/loginRegister'
     },
     output:{
-        path:path.join(__dirname,'dist'),
-        filename:'[name].js',
-        publicPath:'/static/'  // 基于 --content-base 的相对路径
+        path:path.join(__dirname,'dist','js'),
+        filename:'[name].js'
     },
     plugins:[
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         commonLib,
-        chunkCss
+        chunkCss,
+	    new HtmlWebpackPlugin({
+		    filename:'../index.html',
+		    chunks:['index','commons'],
+		    template:'./src/index.html'
+	    }),
+	    new HtmlWebpackPlugin({
+		    filename:'../login_register.html',
+		    chunks:['index','commons'],
+		    template:'./src/login_register.html'
+	    })
     ],
     externals:{
         "jquery":"jQuery"
@@ -47,6 +56,10 @@ module.exports = {
                 test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
                 loader: 'url-loader?limit=50000&name=[path][name].[ext]'
             },
+	        {
+		        test:/\.css$/,
+		        loaders:['style','css']
+	        },
             {
                 test:/\.less$/,
                 loader: ExtractTextPlugin.extract(
