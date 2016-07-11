@@ -8,6 +8,7 @@ require('console-polyfill');
 
 // require('../libs/cowui/dist/cowui.css');
 require('../libs/cow/src/modal');
+require('../less/index.less');
 
 var $ = require('jquery');
 var App = require('../abstract/app.js');

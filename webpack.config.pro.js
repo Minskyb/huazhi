@@ -5,6 +5,8 @@ var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var precss       = require('precss');
+var autoprefixer = require('autoprefixer');
 
 /*
  * 注意：兼容模式调试时，请关闭热启动
@@ -54,11 +56,11 @@ module.exports = {
             },
 	        {
 		        test:/\.css$/,
-		        loaders:['style','css']
+		        loaders:['style','css','postcss?{browsers:["last 2 version", "Firefox 15","ie8","ie9"]}']
 	        },
             {
                 test:/\.less$/,
-                loaders:['style','css','less']
+                loaders:['style','css','less','postcss?{browsers:["last 2 version", "Firefox 15","ie8","ie9"]}']
             },
             {
                 test:/\.html$/,
@@ -67,5 +69,8 @@ module.exports = {
                 include:__dirname
             }
         ]
-    }
+    },
+	postcss: function () {
+		return [autoprefixer, precss];
+	},
 }

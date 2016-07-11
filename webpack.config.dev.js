@@ -5,6 +5,8 @@ var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var precss       = require('precss');
+var autoprefixer = require('autoprefixer');
 
 var commonLib = new webpack.optimize.CommonsChunkPlugin({
     name:"commons",
@@ -58,14 +60,15 @@ module.exports = {
             },
 	        {
 		        test:/\.css$/,
-		        loaders:['style','css']
+		        loaders:['style','css','postcss?{browsers:["last 2 version", "Firefox 15","ie8","ie9"]}']
 	        },
             {
                 test:/\.less$/,
                 loader: ExtractTextPlugin.extract(
                     // activate source maps via loader query
                     'css?sourceMap!'+
-                    'less?sourceMap'
+                    'less?sourceMap!' +
+                    'postcss?{browsers:["last 2 version", "Firefox 15","ie8","ie9"]}'
                 )
             },
             // {
@@ -80,7 +83,10 @@ module.exports = {
             }
         ]
     },
-    devServer:{
+	postcss: function () {
+		return [autoprefixer, precss];
+	},
+	devServer:{
         hot:true  // 关闭这里
     }
 }
