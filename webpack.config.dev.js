@@ -15,8 +15,9 @@ var commonLib = new webpack.optimize.CommonsChunkPlugin({
     chunks:["index","loginRegister"]
 })
 
-var chunkCss =  new ExtractTextPlugin("[name].css",{
-    allChunks:true
+var chunkCss =  new ExtractTextPlugin("../css/[name].css?[chunkhash:8]",{
+    allChunks:true,
+    disable:false
 })
 
 /*

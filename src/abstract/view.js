@@ -46,6 +46,7 @@ BView.prototype.initProperty = function(){
     this.state = 'init';
     this.data = null;
     this.id = _.uniqueId('template_ui_');
+    console.time(this.id);
     this.events = [
         //{
         //    eventTarget:'jquery selector',
@@ -64,6 +65,10 @@ BView.prototype.setOptions = function(options){
 
     if(_.isString(this.wrapper) && /^\.|\#/.test(this.wrapper)){
         this.$wrapper = $(this.wrapper);
+
+        if(!this.$wrapper.length){
+            console.error("未找到指定容器!");
+        }
     }
     else{
         console.error("wrapper 未找到，请检查传入值是否符合规则（. 或 # 开头）")
@@ -120,6 +125,7 @@ BView.prototype.addEvent = function(){
     this.events.map(function(item,i){
         self.$element.delegate(item.eventTarget,item.type,item.callback);
     });
+    console.timeEnd(this.id);
 }
 
 BView.prototype.removeEvent = function(){

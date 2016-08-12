@@ -16,7 +16,7 @@ var App = function(options){
 
 App.prototype.initProperty = function(){
     // 默认路由模块载入口
-    this.routerEntry = '.js-router-entry';
+    this.routerEntry = '#main';
 
     // 预载入组件声明
     this.views = [];
@@ -34,7 +34,7 @@ App.prototype.initProperty = function(){
     this.routerComponents = {};
 
     // 默认路由
-    this.defaultRouter = null;
+    this.defaultRouter = "home";
 }
 
 App.prototype.setOptions = function(options){

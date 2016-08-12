@@ -1,0 +1,26 @@
+<div class="cow_dropdown" data-toggle="dropdown">
+    <div class="cow_input_group">
+        <span class="cow_form_control cow_add_right cow_dropdown_title"><%=title%></span>
+        <span class="cow_icon_caret cow_extra_right">
+            <input class="cow_dropdown_value" type="hidden" name="<%=name%>" placeholder="省份">
+        </span>
+    </div>
+    <ul class="cow_dropdown_menu">
+        <li><a href="javascript:void(0)"><%=title%></a></li>
+        <%
+            var menu = null;
+            for(var i = 0 ,len = menus.length ; i < len ; i++){
+                menu = menus[i];
+                if(menu == 'divider'){
+        %>
+        <li class="cow_divider"></li>
+        <%
+                } else {
+        %>
+        <li><a href="javascript:void(0)"><%=menu%></a></li>
+        <%
+                }
+            }
+        %>
+    </ul>
+</div>

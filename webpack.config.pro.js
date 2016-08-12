@@ -18,7 +18,7 @@ module.exports = {
     },
     output:{
         path:path.join(__dirname,'dist','js'),
-        filename:'[name]?[chunkhash:8].js',
+        filename:'[name].js?[chunkhash:8]',
 	    chunkFilename: "./async/[name].[id].js"
     },
     plugins:[
@@ -29,10 +29,11 @@ module.exports = {
 		    name:"commons",
 		    filename:'commons.js',
 		    minChunks:2,  // 被至少 2 个 chunks 引用才会被提炼出来。
-		    chunks:["index","loginRegister"]
+		    chunks:["index","login_register"]
 	    }),
-	    new ExtractTextPlugin("[name].css",{
-		    allChunks:true
+	    new ExtractTextPlugin("../ccs/[name].css?[chunkhash:8]",{
+		    allChunks:true,
+            disable:false
 	    }),
 	    new HtmlWebpackPlugin({
 		    filename:'../index.html',
@@ -41,7 +42,7 @@ module.exports = {
 	    }),
 	    new HtmlWebpackPlugin({
 		    filename:'../login_register.html',
-		    chunks:['index','commons'],
+		    chunks:['login_register','commons'],
 		    template:'./src/login_register.html'
 	    })
     ],
@@ -60,7 +61,8 @@ module.exports = {
 	        },
             {
                 test:/\.less$/,
-                loaders:['style','css','less','postcss?{browsers:["last 2 version", "Firefox 15","ie8","ie9"]}']
+                //loaders:['style','css','less','postcss?{browsers:["last 2 version", "Firefox 15","ie8","ie9"]}'],
+                loader: ExtractTextPlugin.extract('style','css','less','postcss?{browsers:["last 2 version", "Firefox 15","ie8","ie9"]}')
             },
             {
                 test:/\.html$/,
@@ -72,5 +74,5 @@ module.exports = {
     },
 	postcss: function () {
 		return [autoprefixer, precss];
-	},
+	}
 }
