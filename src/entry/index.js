@@ -45,3 +45,29 @@ $(document).ready(function(){
     var index = new App(options);
     index.init();
 });
+
+// if(module.hot){
+//     module.hot.accept(['../components/common/Header','../components/home/'],function(){
+//         var Header = require('../components/common/Header');
+//         var Home = require('../components/home/');
+//         var options = {
+//             views:[
+//                 {
+//                     componentClass:Header,
+//                     options:{
+//                         wrapper:".js_c_header"
+//                     }
+//                 }
+//             ],
+//             routers:[
+//                 {
+//                     componentId:"home",
+//                     componentClass:Home
+//                 }
+//             ]
+//         }
+//
+//         var index = new App(options);
+//         index.init();
+//     });
+// }

@@ -10,6 +10,8 @@ var HSlider = require('./HSlider.js');
 var CCircleList = require('../common/CCircleList.js');
 var Dropdwon = require('../common/Dropdown.js');
 var CascadeCity = require('../common/CascadeCity.js');
+var Star = require('../../libs/cow/src/star');
+
 
 var Home = function(options){
     BC.call(this,options);
@@ -52,6 +54,14 @@ Home.prototype = $.extend({},BC.prototype,{
                 }
             }
         ]
+    },
+    render:function(){
+        BC.prototype.render.call(this);
+
+        var star = Star($(".cow_star"),{
+            number:5,
+            level:2
+        });
     }
 });
 
