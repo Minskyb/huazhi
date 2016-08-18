@@ -1,6 +1,0 @@
-[submodule "src/libs/cow"]
-	path = src/libs/cow
-	url = https://github.com/Minskyb/cow.git
-[submodule "src/libs/cowui"]
-	path = src/libs/cowui
-	url = https://github.com/Minskyb/cowui.git
